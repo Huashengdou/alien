@@ -32,10 +32,11 @@ class Ship():
     def update(self):
         """根据移动标志调制飞船位置"""
         if self.moving_right:
-            self.rect.centerx += 1
+            self.center += self.ai_settings.ship_speed_factor
         if self.moving_left:
-            self.rect.centerx -= 1
-
+            self.center -= self.ai_settings.ship_speed_factor
+        # 根据self.center更新rect对象
+        self.rect.centerx = self.center
     def blitme(self):
         """在指定位置绘制飞船"""
         self.screen.blit(self.image, self.rect)
