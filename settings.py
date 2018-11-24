@@ -9,3 +9,7 @@ class Settings():
 
         # 屏幕背景颜色设置
         self.bg_color = (230, 230, 230)
+
+        # 飞船的设置
+        # 飞船移动速度的设置
+        self.ship_speed_factor = 1.5

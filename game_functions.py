@@ -1,10 +1,22 @@
 import sys
 import pygame
-def check_event():
+def check_event(ship):
     """响应按键和鼠标事件"""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                # 向右移动飞船
+                ship.moving_right = True
+            if event.key == pygame.K_LEFT:
+                # 向左移动飞船
+                ship.moving_left = True
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT:
+                ship.moving_right = False
+            if event.key == pygame.K_LEFT:
+                ship.moving_left = False
 
 def update_screen(ai_settings, screen, ship):
     """更新屏幕图像，并切换到新屏幕"""

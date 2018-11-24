@@ -1,12 +1,13 @@
 import pygame
 class Ship():
     """与飞船有关的属性"""
-    def __init__(self, screen):
+    def __init__(self, ai_settings, screen):
         """
         初始化飞船，并初始化其位置
         参数screen是整个游戏的窗口
         """
         self.screen = screen
+        self.ai_settings = ai_settings
 
         # 加载飞船图像，并获取其外接矩形
         # load函数返回一个表示飞船的surface
@@ -22,7 +23,19 @@ class Ship():
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
 
+        # 将飞船的属性center中存储为小数
+        self.center = float(self.rect.centerx)
+        # 飞船是否移动的标志
+        self.moving_right = False
+        self.moving_left = False
+
+    def update(self):
+        """根据移动标志调制飞船位置"""
+        if self.moving_right:
+            self.rect.centerx += 1
+        if self.moving_left:
+            self.rect.centerx -= 1
+
     def blitme(self):
         """在指定位置绘制飞船"""
-        self.image.fill((0, 0, 255))
         self.screen.blit(self.image, self.rect)
