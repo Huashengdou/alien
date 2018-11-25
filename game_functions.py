@@ -10,7 +10,7 @@ def fire_bullet(ai_settings, screen, ship, bullets):
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet)
 
-def check_keydown_event(event, ai_settings, screen, ship, bullets):
+def check_keydown_event(event, ai_settings, screen, ship, bullets, stats):
     """相应按键按下"""
     if event.key == pygame.K_RIGHT:
         # 向右移动飞船
@@ -18,7 +18,7 @@ def check_keydown_event(event, ai_settings, screen, ship, bullets):
     if event.key == pygame.K_LEFT:
         # 向左移动飞船
         ship.moving_left = True
-    if event.key == pygame.K_SPACE:
+    if event.key == pygame.K_SPACE and stats.game_active:
         fire_bullet(ai_settings, screen, ship, bullets)
     if event.key == pygame.K_q:
         sys.exit()
@@ -37,6 +37,8 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
     if button_clicked and not stats.game_active:
         # 隐藏鼠标箭头，游戏结束后，箭头重新显示
         pygame.mouse.set_visible(False)
+        # 重置游戏设置
+        ai_settings.initialize_dynamic_settings()
         # 重置游戏统计信息
         stats.reset_stats()
         stats.game_active = True
@@ -53,11 +55,11 @@ def check_event(ai_settings, screen, stats, play_button, ship, aliens, bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            check_keydown_event(event, ai_settings, screen, ship, bullets)
-        elif event.type == pygame.KEYUP:
+        if event.type == pygame.KEYDOWN:
+            check_keydown_event(event, ai_settings, screen, ship, bullets, stats)
+        if event.type == pygame.KEYUP:
             check_keyup_event(event, ship)
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets,
                               mouse_x, mouse_y)
@@ -77,6 +79,7 @@ def update_bullets(ai_settings, screen, ship, aliens,bullets):
     # 如果外星人都被射杀，就在创建一群
     if len(aliens) == 0:
         bullets.empty()
+        ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)
 
 def get_number_aliens_x(ai_settings, alien_width):
