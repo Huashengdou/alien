@@ -19,3 +19,6 @@ class Settings():
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = 0,0,255#60, 60, 60
+        self.bullets_allowed = 3
+        # 连续发射子弹标志
+        # self.continue_fire = False

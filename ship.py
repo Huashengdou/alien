@@ -1,4 +1,5 @@
 import pygame
+from bullet import Bullet
 class Ship():
     """与飞船有关的属性"""
     def __init__(self, ai_settings, screen):
@@ -29,7 +30,7 @@ class Ship():
         self.moving_right = False
         self.moving_left = False
 
-    def update(self):
+    def update(self, ai_settings, screen, ship, bullets):
         """根据移动标志调制飞船位置"""
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.ai_settings.ship_speed_factor
