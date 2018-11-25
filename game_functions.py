@@ -80,6 +80,10 @@ def create_fleet(ai_settings, screen, ship, aliens):
         for alien_number in range(number_aliens_x):
            create_alien(ai_settings, screen, aliens, alien_number, row_number)
 
+def update_aliens(aliens):
+    """更新外星人群的位置"""
+    aliens.update()
+
 def update_screen(ai_settings, screen, ship, aliens, bullets):
     """更新屏幕图像，并切换到新屏幕"""
     # 每次循环都重新绘制屏幕

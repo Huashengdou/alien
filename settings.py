@@ -22,3 +22,6 @@ class Settings():
         self.bullets_allowed = 3
         # 连续发射子弹标志
         # self.continue_fire = False
+
+        # 外星人设置
+        self.alien_speed_factor = 1
