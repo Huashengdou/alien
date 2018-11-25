@@ -40,7 +40,7 @@ def check_event(ai_settings, screen, ship, bullets):
         elif event.type == pygame.KEYUP:
             check_keyup_event(event, ship)
 
-def update_bullets(bullets):
+def update_bullets(aliens,bullets):
     """更新子弹位置，并删除已经消失的子弹"""
     # 更新子弹位置
     bullets.update()
@@ -48,6 +48,9 @@ def update_bullets(bullets):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+    # 检查是否有子弹击中了外星人
+    # 如果击中，就删除相应的子弹和外星人
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
 def get_number_aliens_x(ai_settings, alien_width):
     """计算每行可容纳多少个外星人"""
