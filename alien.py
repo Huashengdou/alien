@@ -39,3 +39,4 @@ class Alien(Sprite):
         """向右或向左移动飞船"""
         self.x += (self.ai_settings.alien_speed_factor * self.ai_settings.fleet_direction)
         self.rect.x = self.x
+
