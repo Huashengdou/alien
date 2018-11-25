@@ -24,7 +24,7 @@ class ScoreBoard():
         # 将得分放在右上角
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.screen_rect.right - 20
-        self.score_rect.top = 20
+        self.score_rect.top = 10
 
     def show_score(self):
         """在屏幕上显示得分"""

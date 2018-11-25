@@ -98,9 +98,10 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     """创建外星人"""
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
-    alien.x = alien_width + 2 * alien_width * alien_number
-    alien.rect.x = alien.x
-    alien.rect.y = alien.rect.height + 2*alien.rect.height * row_number
+    alien.rect.x = alien_width + 2 * alien_width * alien_number
+    # 20的意思是将上部空间留出，作为计分牌
+    alien.rect.y = alien.rect.height + 2*alien.rect.height * row_number + 20
+    print(alien.rect.y)
     aliens.add(alien)
 
 def create_fleet(ai_settings, screen, ship, aliens):
@@ -111,7 +112,7 @@ def create_fleet(ai_settings, screen, ship, aliens):
     # 创建第一行外星人
     for row_number in range(number_rows):
         for alien_number in range(number_aliens_x):
-           create_alien(ai_settings, screen, aliens, alien_number, row_number)
+            create_alien(ai_settings, screen, aliens, alien_number, row_number)
 
 def check_fleet_edges(ai_settings, aliens):
     """有外星人到达边缘时采取相应措施"""
