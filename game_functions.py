@@ -1,6 +1,7 @@
 import sys
 import pygame
 from bullet import Bullet
+from alien import Alien
 
 def fire_bullet(ai_settings, screen, ship, bullets):
     """发射子弹函数"""
@@ -48,7 +49,21 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-def update_screen(ai_settings, screen, ship, alien, bullets):
+def create_fleet(ai_settings, screen, aliens):
+    """创建外星人群"""
+    alien = Alien(ai_settings, screen)
+    alien_width = alien.rect.width
+
+    available_space_x = ai_settings.screen_width - 2*alien_width
+    number_aliens_x = int(available_space_x/(2*alien_width))
+    # 创建第一行外星人
+    for alien_number in range(number_aliens_x):
+        alien = Alien(ai_settings, screen)
+        alien.x = alien_width + 2*alien_width * alien_number
+        alien.rect.x = alien.x
+        aliens.add(alien)
+
+def update_screen(ai_settings, screen, ship, aliens, bullets):
     """更新屏幕图像，并切换到新屏幕"""
     # 每次循环都重新绘制屏幕
     screen.fill(ai_settings.bg_color)
@@ -57,7 +72,7 @@ def update_screen(ai_settings, screen, ship, alien, bullets):
     # 绘制飞船
     ship.blitme()
     # 绘制外星人
-    alien.blitme()
+    aliens.draw(screen)
 
     # 让最近绘制的屏幕可见
     pygame.display.flip()
