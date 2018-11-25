@@ -136,8 +136,9 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
         ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
     check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
 
-def update_screen(ai_settings, screen, ship, aliens, bullets):
+def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button):
     """更新屏幕图像，并切换到新屏幕"""
+
     # 每次循环都重新绘制屏幕
     screen.fill(ai_settings.bg_color)
     for bullet in bullets.sprites():
@@ -146,6 +147,8 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
     ship.blitme()
     # 绘制外星人
     aliens.draw(screen)
-
+    # 如果游戏处于非活动状态就绘制play按钮
+    if not stats.game_active:
+        play_button.draw_button()
     # 让最近绘制的屏幕可见
     pygame.display.flip()
