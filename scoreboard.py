@@ -18,6 +18,8 @@ class ScoreBoard():
         self.prep_score()
         # 准备最高分的图像
         self.prep_high_score()
+        # 准备等级图像
+        self.prep_level()
 
     def prep_score(self):
         """将得分转化为一副渲染的图像"""
@@ -40,9 +42,18 @@ class ScoreBoard():
         self.high_score_image = self.font.render(high_score_str, True, self.text_color, self.ai_settings.bg_color)
 
         # 将最高分显示在屏幕中央
-        self.high_score_rect = self.score_image.get_rect()
+        self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.centerx = self.screen_rect.centerx
-        self.high_score_rect.top = self.score_rect.top
+        self.high_score_rect.top = self.screen_rect.top + 10
+
+    def prep_level(self):
+        """将游戏等级渲染为一副图像"""
+        self.level_image = self.font.render(str(self.stats.level), True, self.text_color, self.ai_settings.bg_color)
+
+        # 将等级放在下方
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.right = self.screen_rect.right
+        self.level_rect.bottom = self.screen_rect.bottom
 
     def reset_game_score(self):
         """游戏重新开始，重新将得分置为0"""
@@ -53,6 +64,7 @@ class ScoreBoard():
         """在屏幕上显示得分"""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.level_image, self.level_rect)
 
 
 
