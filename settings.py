@@ -18,7 +18,7 @@ class Settings():
 
         # 子弹的设置
         # self.bullet_speed_factor = 3
-        self.bullet_width = 3
+        self.bullet_width = 1200
         self.bullet_height = 15
         self.bullet_color = 0,0,255#60, 60, 60
         self.bullets_allowed = 3
@@ -33,6 +33,8 @@ class Settings():
 
         # 提升游戏难度
         self.speedup_scale = 1.1
+        # 击落外星人时分数提高的速度
+        self.score_scale = 1.5
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
@@ -52,3 +54,5 @@ class Settings():
         self.ship_speed_factor *= self.speedup_scale
         self.bullet_speed_factor *= self.speedup_scale
         self.alien_speed_factor *= self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
