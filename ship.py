@@ -1,12 +1,14 @@
 import pygame
 from bullet import Bullet
-class Ship():
+from pygame.sprite import Sprite
+class Ship(Sprite):
     """与飞船有关的属性"""
     def __init__(self, ai_settings, screen):
         """
         初始化飞船，并初始化其位置
         参数screen是整个游戏的窗口
         """
+        super(Ship, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 

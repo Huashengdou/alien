@@ -47,6 +47,8 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
         sb.prep_score()
         sb.prep_high_score()
         sb.prep_level()
+        sb.prep_ships()
+
         # 清空子弹和外星人列表
         aliens.empty()
         bullets.empty()
@@ -150,6 +152,8 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets, sb):
     if stats.ships_left > 0:
         # 将ships_left减1
         stats.ships_left -= 1
+        # 更新计分牌
+        sb.prep_ships()
         # 清空子弹和外星人列表
         aliens.empty()
         bullets.empty()
