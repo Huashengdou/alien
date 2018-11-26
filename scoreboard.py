@@ -18,7 +18,10 @@ class ScoreBoard():
         self.prep_score()
     def prep_score(self):
         """将得分转化为一副渲染的图像"""
-        score_str = str(self.stats.score)
+        rounded_score = round(self.stats.score,-1)
+        #score_str = str(self.stats.score)
+        # 字符串格式设置指令，将数值转换为字符串时在其中插入逗号
+        score_str = "{:,}".format(rounded_score)
         self.score_image = self.font.render(score_str,True, self.text_color, self.ai_settings.bg_color)
 
         # 将得分放在右上角
