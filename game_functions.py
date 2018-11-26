@@ -64,7 +64,7 @@ def check_event(ai_settings, screen, stats, play_button, ship, aliens, bullets):
             check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets,
                               mouse_x, mouse_y)
 
-def update_bullets(ai_settings, screen, ship, aliens,bullets):
+def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """更新子弹位置，并删除已经消失的子弹"""
     # 更新子弹位置
     bullets.update()
@@ -74,8 +74,9 @@ def update_bullets(ai_settings, screen, ship, aliens,bullets):
             bullets.remove(bullet)
     # 检查是否有子弹击中了外星人
     # 如果击中，就删除相应的子弹和外星人
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    #collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
+    check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets)
     # 如果外星人都被射杀，就在创建一群
     if len(aliens) == 0:
         bullets.empty()
@@ -98,10 +99,10 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     """创建外星人"""
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
-    alien.rect.x = alien_width + 2 * alien_width * alien_number
-    # 20的意思是将上部空间留出，作为计分牌
+    alien.x = alien_width + 2 * alien_width * alien_number
+    alien.rect.x = alien.x
+    # 加20的意思是优化计分牌显示空间
     alien.rect.y = alien.rect.height + 2*alien.rect.height * row_number + 20
-    print(alien.rect.y)
     aliens.add(alien)
 
 def create_fleet(ai_settings, screen, ship, aliens):
@@ -126,6 +127,16 @@ def change_fleet_direction(ai_settings, aliens):
     for alien in aliens.sprites():
         alien.rect.y += ai_settings.fleet_drop_speed
     ai_settings.fleet_direction *= -1
+
+def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets):
+    """相应子弹和外星人发生碰撞"""
+    # 删除发生碰撞的子弹和外星人
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    if collisions:
+        print("hehheh")
+        for aliens in collisions.values():
+            stats.score += ai_settings.alien_points * len(aliens)
+            sb.prep_score()
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
     """响应被外星人撞到的飞船"""

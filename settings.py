@@ -18,7 +18,7 @@ class Settings():
 
         # 子弹的设置
         # self.bullet_speed_factor = 3
-        self.bullet_width = 1200
+        self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = 0,0,255#60, 60, 60
         self.bullets_allowed = 3
@@ -33,7 +33,6 @@ class Settings():
 
         # 提升游戏难度
         self.speedup_scale = 1.1
-
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
@@ -44,6 +43,9 @@ class Settings():
 
         # fleet_direction为1表示右移，为-1表示左移
         self.fleet_direction = 1
+
+        # 计分
+        self.alien_points = 50
 
     def increase_speed(self):
         """提高速度设置"""
