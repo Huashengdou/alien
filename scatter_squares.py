@@ -5,7 +5,8 @@ y_value = [x ** 2 for x in x_value]
 # edgecolors删除数据点轮廓，s是数据点大小
 # 自定义颜色，c代表
 # 颜色还可以按照RGB指定
-plt.scatter(x_value, y_value,color=(0,1,0), edgecolors='none', s=50)
+#plt.scatter(x_value, y_value,color=(0,1,0), edgecolors='none', s=50)
+plt.scatter(x_value, y_value,c=y_value,cmap=plt.cm.Greens, edgecolors='none', s=50)
 #plt.scatter(2, 4, s=200)
 # 设置图表标题并给坐标轴加上标签
 plt.title("Square Hahaha", fontsize=24)
