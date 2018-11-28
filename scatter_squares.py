@@ -18,4 +18,6 @@ plt.tick_params(axis='both', which='major', labelsize=14)
 
 # 设置每个坐标轴的取值范围
 plt.axis([10, 1100, 0, 1100000])
-plt.show()
+# 自动保存图标,后面参数是将图表多余的空白区域剪掉
+plt.savefig('squares_plots.png', bbox_inches='tight')
+#plt.show()
