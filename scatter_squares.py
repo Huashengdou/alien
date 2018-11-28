@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 
 x_value = list(range(1,1001))
 y_value = [x ** 2 for x in x_value]
-plt.scatter(x_value, y_value, s=50)
+# edgecolors删除数据点轮廓，s是数据点大小
+plt.scatter(x_value, y_value, edgecolors='none', s=50)
 #plt.scatter(2, 4, s=200)
 # 设置图表标题并给坐标轴加上标签
 plt.title("Square Hahaha", fontsize=24)
