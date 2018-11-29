@@ -5,9 +5,10 @@ from random_walk import RandomWalk
 # 只要程序处于活跃状态，就不断的模拟随机同步
 while True:
     # 创建一个RandomWalk实例， 并将其包含的点都绘制出来
-    rw = RandomWalk(50000)
+    rw = RandomWalk()
     rw.fill_walk()
-
+    # 设置绘制窗口尺寸
+    plt.figure(figsize=(10, 6))
     point_number = list(range(rw.number_points))
     plt.scatter(rw.x_value, rw.y_value,c=point_number,cmap=plt.cm.Blues,edgecolors='none', s=1)
     # 突出起点和终点
