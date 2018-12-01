@@ -15,7 +15,14 @@ repo_dicts = response_dict['items']
 print('repositories returned:',len(repo_dicts))
 # 研究第一个仓库
 repo_dict = repo_dicts[0]
-for key in sorted(repo_dict.keys()):
-    print(key)
+#for key in sorted(repo_dict.keys()):
+#   print(key)
 
-
+print("\nSelected information about first repository:")
+print('Name:',repo_dict['name'])
+print('Owener:',repo_dict['owner']['login'])
+print('Starts:',repo_dict['stargazers_count'])
+print('Repository:',repo_dict['html_url'])
+print('Created:',repo_dict['created_at'])
+print('Updated:',repo_dict['updated_at'])
+print('Description:',repo_dict['description'])
