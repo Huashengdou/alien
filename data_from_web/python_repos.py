@@ -13,4 +13,9 @@ print("Total repositories:", response_dict['total_count'])
 # 获取有关仓库信息
 repo_dicts = response_dict['items']
 print('repositories returned:',len(repo_dicts))
+# 研究第一个仓库
+repo_dict = repo_dicts[0]
+for key in sorted(repo_dict.keys()):
+    print(key)
+
 
