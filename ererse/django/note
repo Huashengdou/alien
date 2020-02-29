@@ -1,0 +1,6 @@
+# 创建django步骤
+- 安装django:pip install Django
+- 创建项目project：django-admin startproject mysite .
+- 测试安装是否成功：python manage.py runserver
+- 创建应用，在创建根目录（和manage.py目录一致）：python manage.py start blog
+- 在INSTALLED_APPS中注册该应用（mysite/settings.py）
